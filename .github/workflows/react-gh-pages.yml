@@ -1,0 +1,54 @@
+name: Build and Deploy React Project
+
+# Trigger workflow on push to the master branch
+on:
+  push:
+    branches:
+      - master  # The branch that will trigger the workflow
+
+permissions:
+  contents: write  # Required to push to the repository
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest  # The environment to run the job
+
+    concurrency:
+      group: ci-${{ github.ref }}  # Prevents concurrent deployments to the same branch
+      cancel-in-progress: true  # Cancels any in-progress runs for the same branch
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Node.js (for React build)
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # Specify Node.js version (React typically works with 16 or 18)
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: |
+          cd pro  # Navigate to the 'pro' folder where the React project resides
+          npm ci  # Install dependencies using npm ci (clean install)
+
+      # Step 4: Build the React project
+      - name: Build React project
+        run: |
+          cd pro  # Make sure you're in the 'pro' folder
+          npm run build  # Builds the React project, output in 'pro/build'
+
+      # Step 5: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: pro/build  # The folder to deploy, which is inside the 'pro' folder
+          branch: gh-pages  # The branch where the built app will be deployed (GitHub Pages default)
+          token: ${{ secrets.GITHUB_TOKEN }}  # GitHub token to authenticate deployment
+
+      # Optional: Clean up (not necessary but can help in case of issues)
+      - name: Clean up
+        run: |
+          rm -rf node_modules  # Clean node_modules folder after deployment to save space
