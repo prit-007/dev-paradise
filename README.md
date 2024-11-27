@@ -105,6 +105,10 @@ This structured approach ensures modularity, scalability, and ease of maintenanc
     ```bash
     npm start
     ```
+    -For tailwind live building
+    ```bash
+        npx tailwindcss -i ./src/input.css -o ./src/output.css --watch
+    ```
 5. Open your browser and navigate to:
     ```arduino
     http://localhost:3000
