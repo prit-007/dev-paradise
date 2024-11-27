@@ -1,7 +1,7 @@
 // pages/About.jsx
 import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin, GraduationCap, Code, Sparkles } from 'lucide-react'
-
+import { FaLinkedin, FaGithub, FaInstagram, FaEnvelope } from "react-icons/fa";
 const About = () => {
   const teamMembers = [
     {
@@ -58,7 +58,7 @@ const About = () => {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <motion.section 
+      <motion.section
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         className="py-20 bg-gradient-to-b from-blue-50 to-purple-50"
@@ -92,7 +92,7 @@ const About = () => {
               <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-xl shadow-lg mb-8">
                 <h2 className="text-2xl font-bold text-gray-800 mb-4">Who We Are</h2>
                 <p className="text-gray-700">
-                  We are a dynamic group of skilled engineers studying at Darshan University, Rajkot, Gujarat, India. 
+                  We are a dynamic group of skilled engineers studying at Darshan University, Rajkot, Gujarat, India.
                   Our passion for technology and innovation drives us to create exceptional software solutions that make a difference.
                 </p>
               </div>
@@ -121,6 +121,25 @@ const About = () => {
                 </div>
               </div>
             </motion.div>
+          </div>
+        </div>
+      </section>
+      <section className="py-8 bg-gradient-to-b from-gray-50 to-gray-100">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-gray-800 text-center mb-4">Our Journey</h2>
+          <div className="text-gray-700 leading-relaxed">
+            <p className="mb-4">
+              Developer's Paradise was born from an idea envisioned by <strong>Prit Vasani</strong> and his friends during their second year of B.Tech in January 2024.
+              Prit shared his vision with like-minded peers, and together, they formed a team of developers, each skilled in different fields. They started working on projects,
+              both individually and as a team, gradually expanding their expertise.
+            </p>
+            <p className="mb-4">
+              Over time, the group grew, attracting talent from across their college campus. They collaborated on innovative solutions, built impactful applications, and pursued freelance projects to gain experience.
+              Despite being freshers, the team has showcased remarkable potential in the tech industry.
+            </p>
+            <p className="mb-4">
+              Looking ahead, we are gearing up to establish Developer's Paradise as a prominent player in the tech industry by 2026. Our journey is just beginning, and we are excited to explore new horizons in the ever-evolving world of technology.
+            </p>
           </div>
         </div>
       </section>
@@ -166,22 +185,106 @@ const About = () => {
       </section>
 
       {/* Contact Information */}
-      <section className="py-16 bg-white">
+      <section className="py-8 bg-gradient-to-b from-blue-50 to-blue-100">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl shadow-lg p-8">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Get in Touch</h2>
-            <div className="space-y-4">
-              <div className="flex items-center">
-                <MapPin className="h-5 w-5 text-blue-600 mr-3" />
-                <span className="text-gray-700">Gift City, Gandhinagar, India</span>
+          <h2 className="text-3xl font-bold text-gray-800 text-center mb-4">Get in Touch</h2>
+          <p className="text-gray-700 text-center mb-8">
+            We'd love to hear from you! Whether you have a question, a project idea, or just want to say hello, feel free to reach out.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Contact Form */}
+            <form className="bg-white p-6 rounded-lg shadow-md">
+              <div className="mb-4">
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700">Your Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Enter your name"
+                />
               </div>
-              <div className="flex items-center">
-                <Phone className="h-5 w-5 text-blue-600 mr-3" />
-                <span className="text-gray-700">+91 94262 84943</span>
+              <div className="mb-4">
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email Address</label>
+                <input
+                  type="email"
+                  id="email"
+                  className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Enter your email"
+                />
               </div>
-              <div className="flex items-center">
-                <Mail className="h-5 w-5 text-blue-600 mr-3" />
-                <span className="text-gray-700">tech.developersteam.service@gmail.com</span>
+              <div className="mb-4">
+                <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message</label>
+                <textarea
+                  id="message"
+                  rows="4"
+                  className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Write your message here"
+                ></textarea>
+              </div>
+              <button type="submit" className="px-6 py-2 bg-blue-600 text-white rounded shadow">
+                Send Message
+              </button>
+            </form>
+
+            {/* Contact Info */}
+            <div className="container mx-auto px-4">
+              <div className="max-w-3xl mx-auto bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl shadow-lg p-8">
+                <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Get in Touch</h2>
+                <div className="space-y-4">
+                  <div className="flex items-center">
+                    <MapPin className="h-5 w-5 text-blue-600 mr-3" />
+                    <span className="text-gray-700">Gift City, Gandhinagar, India</span>
+                  </div>
+                  <div className="flex items-center">
+                    <Phone className="h-5 w-5 text-blue-600 mr-3" />
+                    <span className="text-gray-700">+91 94262 84943</span>
+                  </div>
+                  <div className="flex items-center">
+                    <Mail className="h-5 w-5 text-blue-600 mr-3" />
+                    <span className="text-gray-700">tech.developersteam.service@gmail.com</span>
+                  </div>
+                </div>
+              <section className='my-5'>
+                <div className="flex space-x-6 justify-center">
+                  <motion.a
+                    href="https://linkedin.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.2 }}
+                    className="text-4xl text-gray-600 hover:text-blue-600"
+                  >
+                    <FaLinkedin />
+                  </motion.a>
+
+                  <motion.a
+                    href="https://github.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.2 }}
+                    className="text-4xl text-gray-600 hover:text-gray-800"
+                  >
+                    <FaGithub />
+                  </motion.a>
+
+                  <motion.a
+                    href="https://instagram.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.2 }}
+                    className="text-4xl text-gray-600 hover:text-pink-600"
+                  >
+                    <FaInstagram />
+                  </motion.a>
+
+                  <motion.a
+                    href="mailto:example@example.com"
+                    whileHover={{ scale: 1.2 }}
+                    className="text-4xl text-gray-600 hover:text-red-600"
+                  >
+                    <FaEnvelope />
+                  </motion.a>
+                </div>
+              </section>
               </div>
             </div>
           </div>
@@ -199,7 +302,7 @@ const About = () => {
             <Sparkles className="h-8 w-8 text-blue-600 mx-auto mb-4" />
             <h2 className="text-2xl font-bold text-gray-800 mb-4">Growing Stronger</h2>
             <p className="text-gray-600">
-              We're excited to announce that new talented members will soon be joining our team, 
+              We're excited to announce that new talented members will soon be joining our team,
               bringing fresh perspectives and additional expertise to Developer's Paradise.
             </p>
           </motion.div>

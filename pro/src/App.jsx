@@ -4,10 +4,11 @@ import Layout from './components/layout/Layout';
 import About from './pages/About';
 import Services from './pages/Services';
 import Team from './pages/Team';
-import Portfolio from './pages/Portfolio';
+
 import Contact from './pages/Contact';
 import Testimonials from './pages/Testimonials';
 import Home from './pages/Home';
+
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
           <Route path="about" element={<About />} />
           <Route path="services" element={<Services />} />
           <Route path="team" element={<Team />} />
-          <Route path="portfolio" element={<Portfolio />} />
+
           <Route path="contact" element={<Contact />} />
           <Route path="testimonials" element={<Testimonials />} />
           {/* Add a 404 page */}

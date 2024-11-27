@@ -235,7 +235,7 @@ const MemberDetailModal = ({ member, onClose }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 p-4 "
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 p-4"
       onClick={onClose}
       onKeyDown={handleKeyDown}
       tabIndex={-1}
@@ -249,15 +249,15 @@ const MemberDetailModal = ({ member, onClose }) => {
         className={`
           relative 
           w-full 
-          max-w-5xl 
+          max-w-6xl 
           max-h-[90vh] 
           rounded-3xl 
           overflow-hidden
-          overflow-y-auto
           shadow-2xl
-          grid 
-          lg:grid-cols-3
-          bg-gradient-to-br ${member.color}
+          flex 
+          flex-col 
+          md:flex-row
+          ${member.color}
         `}
       >
         {/* Close Button */}
@@ -284,8 +284,21 @@ const MemberDetailModal = ({ member, onClose }) => {
           <FaTimes />
         </button>
 
-        {/* Left Side - Profile Image */}
-        <div className="lg:col-span-1 bg-black bg-opacity-10">
+        {/* Mobile & Tablet View - Top Section */}
+        <div className="md:hidden bg-white p-6 text-center">
+          <img
+            src={member.avatar}
+            alt={member.name}
+            className="w-32 h-32 object-cover rounded-full mx-auto mb-4 shadow-lg"
+          />
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">
+            {member.name}
+          </h1>
+          <p className="text-xl text-gray-600 mb-4">{member.title}</p>
+        </div>
+
+        {/* Left Side - Profile Image (Desktop) */}
+        <div className="hidden md:block md:w-1/3 bg-black bg-opacity-10">
           <img
             src={member.avatar}
             alt={member.name}
@@ -294,127 +307,139 @@ const MemberDetailModal = ({ member, onClose }) => {
         </div>
 
         {/* Right Side - Content */}
-        <div className="overflow-y-auto lg:col-span-2 p-8 styled-scrollbar bg-white bg-opacity-90">
+        <div className="overflow-y-auto w-full md:w-2/3 p-6 md:p-8 bg-white bg-opacity-90">
           <div className="space-y-6">
-            <div>
+            {/* Name and Title (Desktop) */}
+            <div className="hidden md:block">
               <h1 className="text-4xl font-bold text-gray-800 mb-2">
                 {member.name}
               </h1>
               <p className="text-2xl text-gray-600">{member.title}</p>
             </div>
 
-            <div className="space-y-4">
-              <h3 className="text-2xl font-semibold flex items-center">
-                <FaProjectDiagram className="mr-3 text-blue-500" />
-                About
-              </h3>
-              <p className="text-gray-700 leading-relaxed">{member.bio}</p>
-            </div>
+            {/* Scrollable Content with Sections */}
+            <div className="space-y-6 max-h-[70vh] overflow-y-auto styled-scrollbar">
+              {/* About Section */}
+              <section>
+                <h3 className="text-2xl font-semibold flex items-center mb-4">
+                  <FaProjectDiagram className="mr-3 text-blue-500" />
+                  About
+                </h3>
+                <p className="text-gray-700 leading-relaxed">{member.bio}</p>
+              </section>
 
-            {/* Professional Details */}
-            <section>
-              <h3 className="text-2xl font-semibold mb-4 flex items-center">
-                <FaCertificate className="mr-3 text-green-500" /> Professional Details
-              </h3>
-              <div className="grid grid-cols-2 gap-4 text-gray-700">
-                <div>
-                  <strong>Joining Date:</strong> {member.joiningDate}
-                </div>
-                <div>
-                  <strong>Experience:</strong> {member.experience}
-                </div>
-                <div>
-                  <strong>Contact:</strong> {member.contact}
-                </div>
-                <div>
-                  <strong>Birth Date:</strong> {member.birthDate}
-                </div>
-              </div>
-            </section>
-
-            {/* Projects */}
-            <section>
-              <h3 className="text-2xl font-semibold mb-4">Projects</h3>
-              <ul className="space-y-2">
-                {member.projects.map((project, index) => (
-                  <li
-                    key={index}
-                    className="bg-gray-100 p-3 rounded-lg"
-                  >
-                    {project}
-                  </li>
-                ))}
-              </ul>
-            </section>
-
-            {/* Certificates */}
-            <section>
-              <h3 className="text-2xl font-semibold mb-4">Certificates</h3>
-              <ul className="space-y-2">
-                {member.certificates.map((certificate, index) => (
-                  <li
-                    key={index}
-                    className="bg-gray-100 p-3 rounded-lg"
-                  >
-                    {certificate}
-                  </li>
-                ))}
-              </ul>
-            </section>
-
-            {/* Resume Download */}
-            <section>
-              <a
-                href={member.resume}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`
-                flex items-center 
-                bg-blue-50 text-blue-600 
-                px-4 py-2 rounded-lg 
-                hover:bg-blue-100 
-                transition-all
-              `}
-              >
-                <FaDownload className="mr-2" /> Download Resume
-              </a>
-            </section>
-
-            {/* Social Links */}
-            <section>
-              <div className="flex space-x-6 justify-center">
-                {Object.entries(member.socialLinks || {}).map(([platform, link]) => {
-                  const IconMap = {
-                    linkedin: FaLinkedin,
-                    github: FaGithub,
-                    instagram: FaInstagram,
-                    email: FaEnvelope
-                  };
-
-                  const Icon = IconMap[platform];
-
-                  return (
-                    <motion.a
-                      key={platform}
-                      href={link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.2 }}
-                      className="text-4xl text-gray-600 hover:text-blue-600"
+              {/* Professional Details */}
+              <section>
+                <h3 className="text-2xl font-semibold mb-4 flex items-center">
+                  <FaCertificate className="mr-3 text-green-500" /> 
+                  Professional Details
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700">
+                  {[
+                    { label: "Joining Date", value: member.joiningDate },
+                    { label: "Experience", value: member.experience },
+                    { label: "Contact", value: member.contact },
+                    { label: "Birth Date", value: member.birthDate }
+                  ].map((detail, index) => (
+                    <div 
+                      key={index} 
+                      className="bg-gray-100 p-3 rounded-lg"
                     >
-                      <Icon />
-                    </motion.a>
-                  );
-                })}
-              </div>
-            </section>
+                      <strong className="block text-gray-600 mb-1">
+                        {detail.label}:
+                      </strong>
+                      {detail.value}
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              {/* Projects */}
+              <section>
+                <h3 className="text-2xl font-semibold mb-4">Projects</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {member.projects.map((project, index) => (
+                    <div
+                      key={index}
+                      className="bg-gray-100 p-3 rounded-lg"
+                    >
+                      {project}
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              {/* Certificates */}
+              <section>
+                <h3 className="text-2xl font-semibold mb-4">Certificates</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {member.certificates.map((certificate, index) => (
+                    <div
+                      key={index}
+                      className="bg-gray-100 p-3 rounded-lg"
+                    >
+                      {certificate}
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              {/* Resume and Social Links */}
+              <section className="space-y-6">
+                {/* Resume Download */}
+                <div>
+                  <a
+                    href={member.resume}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`
+                      flex items-center 
+                      bg-blue-50 text-blue-600 
+                      px-4 py-2 rounded-lg 
+                      hover:bg-blue-100 
+                      transition-all
+                      w-full md:w-auto
+                      justify-center
+                    `}
+                  >
+                    <FaDownload className="mr-2" /> Download Resume
+                  </a>
+                </div>
+
+                {/* Social Links */}
+                <div className="flex space-x-6 justify-center">
+                  {Object.entries(member.socialLinks || {}).map(([platform, link]) => {
+                    const IconMap = {
+                      linkedin: FaLinkedin,
+                      github: FaGithub,
+                      instagram: FaInstagram,
+                      email: FaEnvelope
+                    };
+
+                    const Icon = IconMap[platform];
+
+                    return (
+                      <motion.a
+                        key={platform}
+                        href={link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.2 }}
+                        className="text-4xl text-gray-600 hover:text-blue-600"
+                      >
+                        <Icon />
+                      </motion.a>
+                    );
+                  })}
+                </div>
+              </section>
+            </div>
           </div>
         </div>
       </motion.div>
     </motion.div>
   );
 };
-
 
 const TeamPage = () => {
   const [selectedMember, setSelectedMember] = useState(null);

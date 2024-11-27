@@ -11,7 +11,6 @@ import {
   SiFlutter, SiTypescript
 } from 'react-icons/si';
 
-// Add this new component for project cards
 const ProjectCard = ({ project, color }) => {
   return (
     <motion.div
@@ -178,7 +177,6 @@ const Services = () => {
             { name: "React", icon: <FaReact className="text-blue-500" /> },
             { name: "Bootstrap", icon: <SiBootstrap className="text-blue-500" /> },
             { name: "Node.js", icon: <FaNodeJs className="text-green-600" /> },
-            { name: "Express.js", icon: <SiExpress className="text-black-600" /> },
             { name: "MongoDB", icon: <SiMongodb className="text-green-500" /> }
           ],
           features: [
