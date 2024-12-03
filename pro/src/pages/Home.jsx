@@ -102,7 +102,7 @@ const Home = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex flex-col items-center text-center space-y-8">
             <h1 className="text-5xl md:text-7xl font-bold text-gray-900 leading-tight">
-              Empowering <span className="text-blue-600">Innovation</span> through{" "}
+              Empowering <span className="text-blue-600">Innovation</span> through{" "}<br/>
               <span className="text-blue-600 min-h-[1.5em] inline-block">
                 {displayText}
                 <span className="animate-pulse">|</span>
