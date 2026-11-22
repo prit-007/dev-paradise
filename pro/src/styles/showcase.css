@@ -1,0 +1,19 @@
+.sc-card { position: relative; isolation: isolate; }
+.sc-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .4s;
+  background: radial-gradient(360px circle at var(--px, 50%) var(--py, 50%), rgba(236,72,153,.15), transparent 60%);
+}
+.sc-card:hover::before { opacity: 1; }
+@keyframes sc-in {
+  from { opacity: 0; transform: scale(1.05); filter: blur(10px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+.sc-fade { animation: sc-in .7s cubic-bezier(.2,.8,.2,1); }
+@media (prefers-reduced-motion: reduce) { .sc-fade { animation: none; } }

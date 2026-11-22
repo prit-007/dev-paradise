@@ -1,4 +1,1 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@type {import('tailwindcss').Config}
+/* Tailwind CSS is imported via src/input.css */
