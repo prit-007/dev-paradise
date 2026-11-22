@@ -119,24 +119,62 @@ Counter.propTypes = {
   className: PropTypes.string,
 };
 
-/** Remount (via key) to replay: children rise in with blur, .bar-fill grows. */
-export function Stagger({ children, className = "" }) {
+/** Remount (via key) to replay: targets leaf children (or child items) with blur/stagger, .bar-fill grows. */
+export function Stagger({ children, className = "", skipInitial = false, delay = 0 }) {
   const ref = useRef(null);
+  const isFirst = useRef(true);
+
   useEffect(() => {
     if (prefersReduced()) return;
+    if (skipInitial && isFirst.current) {
+      isFirst.current = false;
+      return;
+    }
+    isFirst.current = false;
+
     const el = ref.current;
+    if (!el) return;
+
+    // Look for nested interactive leaf items first (.stat, .meter, .roster-item, .term code)
+    const leafItems = el.querySelectorAll(".stat, .meter, .roster-item, .term code");
+    const targets = leafItems.length > 0 ? Array.from(leafItems) : Array.from(el.children);
+
     const ctx = gsap.context(() => {
-      gsap.from(Array.from(el.children), { y: 18, autoAlpha: 0, filter: "blur(6px)", stagger: 0.07, duration: 0.7, ease: "power3.out" });
-      gsap.from(Array.from(el.querySelectorAll(".bar-fill")), { scaleX: 0, transformOrigin: "0 50%", duration: 1.3, ease: "expo.out", delay: 0.25 });
+      gsap.fromTo(
+        targets,
+        { y: 20, autoAlpha: 0, filter: "blur(6px)", scale: 0.95 },
+        {
+          y: 0,
+          autoAlpha: 1,
+          filter: "blur(0px)",
+          scale: 1,
+          stagger: 0.08,
+          duration: 0.65,
+          ease: "power3.out",
+          delay,
+        }
+      );
+      const bars = el.querySelectorAll(".bar-fill");
+      if (bars.length > 0) {
+        gsap.fromTo(
+          bars,
+          { scaleX: 0 },
+          { scaleX: 1, transformOrigin: "0 50%", duration: 1.2, ease: "expo.out", delay: delay + 0.2 }
+        );
+      }
     }, el);
+
     return () => ctx.revert();
-  }, []);
+  }, [skipInitial, delay]);
+
   return <div ref={ref} className={className}>{children}</div>;
 }
 
 Stagger.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+  skipInitial: PropTypes.bool,
+  delay: PropTypes.number,
 };
 
 export function useMagnetic(strength = 0.35) {

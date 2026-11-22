@@ -17,6 +17,8 @@ const BUILD = [
 
 export default function HomeHero({ onNavigate = () => {} }) {
   const [tab, setTab] = useState(0);
+  const [introDone, setIntroDone] = useState(false);
+
   return (
     <HeroShell
       pin
@@ -36,52 +38,97 @@ export default function HomeHero({ onNavigate = () => {} }) {
         </>
       }
       marquee={TECH_MARQUEE}
-      build={({ root, q, scrub, desktop, gsap }) => {
+      build={({ root, q, intro, scrub, desktop, gsap }) => {
+        // --- 3D Interactive Pointer Tilt ---
         const tilt = root.querySelector(".stage-tilt");
-        gsap.set(tilt, { transformPerspective: 1400 });
-        const rx = gsap.quickTo(tilt, "rotationX", { duration: 0.9, ease: "power3" });
-        const ry = gsap.quickTo(tilt, "rotationY", { duration: 0.9, ease: "power3" });
+        let updateRect = () => {};
+        let move = () => {};
+        let leave = () => {};
 
-        let rect = null;
-        const updateRect = () => { if (root) rect = root.getBoundingClientRect(); };
-        updateRect();
-        window.addEventListener("resize", updateRect, { passive: true });
+        if (tilt) {
+          gsap.set(tilt, { transformPerspective: 1400 });
+          const rx = gsap.quickTo(tilt, "rotationX", { duration: 0.9, ease: "power3" });
+          const ry = gsap.quickTo(tilt, "rotationY", { duration: 0.9, ease: "power3" });
 
-        const move = (e) => {
-          if (!rect) updateRect();
-          if (!rect || rect.width === 0) return;
-          ry(((e.clientX - rect.left) / rect.width - 0.5) * 16);
-          rx(-((e.clientY - rect.top) / rect.height - 0.5) * 12);
-        };
-        const leave = () => {
-          rx(0);
-          ry(0);
-        };
-        root.addEventListener("pointermove", move, { passive: true });
-        root.addEventListener("pointerleave", leave, { passive: true });
+          let rect = null;
+          updateRect = () => { if (root) rect = root.getBoundingClientRect(); };
+          updateRect();
+          window.addEventListener("resize", updateRect, { passive: true });
 
-        // stage takes over the hero while the copy dissolves with smooth 60-120fps transform
+          move = (e) => {
+            if (!rect) updateRect();
+            if (!rect || rect.width === 0) return;
+            ry(((e.clientX - rect.left) / rect.width - 0.5) * 16);
+            rx(-((e.clientY - rect.top) / rect.height - 0.5) * 12);
+          };
+          leave = () => {
+            rx(0);
+            ry(0);
+          };
+          root.addEventListener("pointermove", move, { passive: true });
+          root.addEventListener("pointerleave", leave, { passive: true });
+        }
+
+        // --- Choreographed Studio Console Intro ---
+        if (intro) {
+          // Terminal dots pop in
+          intro.fromTo(
+            q(".con-bar .dot"),
+            { scale: 0, autoAlpha: 0 },
+            { scale: 1, autoAlpha: 1, duration: 0.45, stagger: 0.08, ease: "back.out(2)" },
+            1.02
+          );
+          // Console tabs stagger in horizontally: Architecture, Telemetry, Build Stream, Team Roster
+          intro.fromTo(
+            q(".con-tab"),
+            { y: -10, autoAlpha: 0, scale: 0.96 },
+            { y: 0, autoAlpha: 1, scale: 1, duration: 0.55, stagger: 0.08, ease: "power3.out" },
+            1.1
+          );
+          // 4 Stat cards reveal sequentially: 7+ Engineers, 99.9% Reliability, 12+ Tech Stacks, Rajkot Location
+          intro.fromTo(
+            q(".con-panel .stat"),
+            { y: 26, autoAlpha: 0, scale: 0.93, filter: "blur(6px)" },
+            { y: 0, autoAlpha: 1, scale: 1, filter: "blur(0px)", duration: 0.7, stagger: 0.09, ease: "power3.out" },
+            1.22
+          );
+          intro.add(() => setIntroDone(true), 2.1);
+        }
+
+        // --- Scroll Scrub Reveal & Pinning Center-Stage Takeover ---
+        // As copy dissolves, stage card glides to dominant center focus
         scrub.to(q(".stage-card"), {
-          scale: desktop ? 1.14 : 1.02,
-          yPercent: desktop ? -44 : -10,
-          duration: 0.7,
+          scale: desktop ? 1.09 : 1.02,
+          yPercent: desktop ? -32 : -6,
+          duration: 0.45,
           ease: "power2.out"
-        }, 0.05);
+        }, 0.04);
         scrub.to(q(".stage-glow"), {
-          scale: 2.2,
-          autoAlpha: 1,
-          duration: 0.7,
+          scale: 2.1,
+          autoAlpha: 0.95,
+          duration: 0.45,
           ease: "power2.out"
-        }, 0.05);
+        }, 0.04);
+
+        // Highlight stats during the center-stage takeover
+        scrub.to(q(".stat"), {
+          borderColor: "rgba(236,72,153,0.32)",
+          duration: 0.35
+        }, 0.12);
 
         // Velvety handoff to downstream sections near the end of pin
         if (desktop) {
           scrub.to(q(".stage-card"), {
-            autoAlpha: 0.18,
-            yPercent: -56,
-            duration: 0.25,
-            ease: "power1.in"
-          }, 0.75);
+            autoAlpha: 0,
+            yPercent: -48,
+            scale: 0.97,
+            duration: 0.12,
+            ease: "power2.in"
+          }, 0.88);
+          scrub.to(q(".stage-glow"), {
+            autoAlpha: 0,
+            duration: 0.12
+          }, 0.88);
         }
 
         return () => {
@@ -95,21 +142,48 @@ export default function HomeHero({ onNavigate = () => {} }) {
       <div className="stage-card">
         <div className="stage-tilt hero-glass">
           <div className="con-bar" role="tablist" aria-label="Studio console">
-            <i className="dot" style={{ background: "#fb7185" }} />
-            <i className="dot" style={{ background: "#fbbf24" }} />
-            <i className="dot" style={{ background: "#34d399" }} />
-            {TABS.map((t, i) => (
-              <button key={t} type="button" role="tab" aria-selected={tab === i}
-                className={`con-tab ${tab === i ? "on" : ""}`} onClick={() => setTab(i)}>{t}</button>
-            ))}
+            <div className="con-dots" aria-hidden="true">
+              <i className="dot" style={{ background: "#fb7185" }} />
+              <i className="dot" style={{ background: "#fbbf24" }} />
+              <i className="dot" style={{ background: "#34d399" }} />
+            </div>
+            <div className="con-tabs">
+              {TABS.map((t, i) => (
+                <button
+                  key={t}
+                  type="button"
+                  role="tab"
+                  aria-selected={tab === i}
+                  className={`con-tab ${tab === i ? "on" : ""}`}
+                  onClick={() => {
+                    setIntroDone(true);
+                    setTab(i);
+                  }}
+                >
+                  {t}
+                </button>
+              ))}
+            </div>
           </div>
-          <Stagger key={tab} className="con-panel">
+          <Stagger key={tab} className="con-panel" skipInitial={!introDone}>
             {tab === 0 && (
               <div className="stat-grid">
-                <div className="stat"><b><Counter to={7} suffix="+" delay={0.1} /></b><span>Engineers</span></div>
-                <div className="stat"><b><Counter to={99.9} decimals={1} suffix="%" delay={0.1} /></b><span>Reliability</span></div>
-                <div className="stat"><b><Counter to={12} suffix="+" delay={0.1} /></b><span>Tech Stacks</span></div>
-                <div className="stat"><b>Rajkot</b><span>Location</span></div>
+                <div className="stat">
+                  <b><Counter to={7} suffix="+" delay={introDone ? 0.08 : 1.3} duration={introDone ? 1.2 : 1.6} /></b>
+                  <span>Engineers</span>
+                </div>
+                <div className="stat">
+                  <b><Counter to={99.9} decimals={1} suffix="%" delay={introDone ? 0.16 : 1.4} duration={introDone ? 1.2 : 1.6} /></b>
+                  <span>Reliability</span>
+                </div>
+                <div className="stat">
+                  <b><Counter to={12} suffix="+" delay={introDone ? 0.24 : 1.5} duration={introDone ? 1.2 : 1.6} /></b>
+                  <span>Tech Stacks</span>
+                </div>
+                <div className="stat">
+                  <b>Rajkot</b>
+                  <span>Location</span>
+                </div>
               </div>
             )}
             {tab === 1 && [
