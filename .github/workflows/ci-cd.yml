@@ -37,7 +37,7 @@ jobs:
       - name: Install dependencies
         run: |
           cd pro
-          npm ci --omit=optional
+          npm install
 
       - name: Run ESLint
         run: |
@@ -61,7 +61,7 @@ jobs:
       - name: Install dependencies
         run: |
           cd pro
-          npm ci --omit=optional
+          npm install
 
       - name: Run Vitest unit tests
         run: |
@@ -86,7 +86,7 @@ jobs:
       - name: Install dependencies
         run: |
           cd pro
-          npm ci --omit=optional
+          npm install
 
       - name: Build Vite project
         run: |
