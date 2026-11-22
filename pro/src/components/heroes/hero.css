@@ -165,6 +165,7 @@
   position: relative;
   isolation: isolate;
   overflow: clip;
+  width: 100%;
   background: var(--hero-bg);
   color: var(--hero-text);
   font-family: "Space Grotesk", system-ui, sans-serif;
@@ -653,7 +654,12 @@
 .t-avatar:hover em, .t-avatar:focus-visible em { opacity: 1; transform: translate(-50%, 0); }
 
 /* ---------- Portfolio rows ---------- */
-.pf-stage { width: 100vw; max-width: none; margin-inline: calc(50% - 50vw); }
+.hero:has(.pf-stage) .hero-inner {
+  max-width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+.pf-stage { width: 100%; max-width: 100%; overflow: hidden; }
 .pf-meta { display: grid; justify-items: center; gap: .3rem; text-align: center; }
 .pf-big {
   font: 800 clamp(4rem, 12vw, 9rem)/.9 Archivo;

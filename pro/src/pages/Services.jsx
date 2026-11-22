@@ -567,17 +567,15 @@ const Services = () => {
   );
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-[#FDF2F8] dark:bg-slate-950 text-slate-900 dark:text-slate-100 py-16 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+    <div ref={containerRef} className="flex flex-col w-full min-h-screen bg-[#FDF2F8] dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <SEO
         title="Engineering Services & Architectures"
         description="Comprehensive full-stack services across Angular, ReactJS, .NET Core, and Flutter mobile frameworks by Developer's Paradise."
       />
 
-      <div className="max-w-6xl mx-auto">
-        <ServicesHero />
+      <ServicesHero />
 
-      {/* Empty state when query returns no projects */}
-
+      <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Empty state when query returns no projects */}
         {filteredTechnologies.length === 0 ? (
           <NoResults

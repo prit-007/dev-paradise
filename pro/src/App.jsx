@@ -52,7 +52,7 @@ function App() {
               <Route
                 path="*"
                 element={
-                  <div className="text-center py-24 bg-[#FDF2F8] dark:bg-slate-950 min-h-[60vh] flex flex-col items-center justify-center">
+                  <div className="text-center pt-32 pb-24 px-4 bg-[#FDF2F8] dark:bg-slate-950 min-h-[60vh] flex flex-col items-center justify-center">
                     <h2 className="text-4xl font-heading font-black text-slate-900 dark:text-white mb-3">Page Not Found</h2>
                     <p className="font-sans text-slate-600 dark:text-slate-400 mb-8 max-w-md">
                       The requested page could not be located in our production directory.

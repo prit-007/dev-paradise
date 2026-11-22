@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
 import { teamMembers } from "@/data/teamMembers";
+import { projects } from "@/data/projects";
 import { TeamAvatar } from "@/pages/Team";
 import SEO from "@/components/SEO";
 import JsonLd from "@/components/common/JsonLd";
@@ -115,141 +116,17 @@ const testimonials = [
   }
 ];
 
-const marqueeProjects = [
-  {
-    id: 1,
-    title: "Real Estate Platform",
-    category: "Web Application",
-    tech: "Angular · Node.js · MongoDB",
-    desc: "A direct person-to-person property marketplace eliminating middlemen with zero platform fees.",
-    link: "/portfolio/1"
-  },
-  {
-    id: 3,
-    title: "Planty Ecosystem",
-    category: "Mobile & AI",
-    tech: "Flutter · AI Vision · Firebase",
-    desc: "Plant identification and e-commerce platform featuring on-device machine learning recognition.",
-    link: "/portfolio/3"
-  },
-  {
-    id: 4,
-    title: "Search Optimate",
-    category: "AI Academic Engine",
-    tech: "Angular · Multi-Model AI · Node",
-    desc: "Aggregated academic search engine unifying student inquiries across top scientific LLMs.",
-    link: "/portfolio/4"
-  },
-  {
-    id: 9,
-    title: "Nook",
-    category: "Mobile",
-    tech: "Flutter · Dart · SQLCipher · libp2p",
-    desc: "Private, local-first, open-source note-taking app. No account. No cloud. No telemetry.",
-    link: "/portfolio/9"
-  },
-  {
-    id: 10,
-    title: "SwapFOSS",
-    category: "Web",
-    tech: "Vue 3 · TypeScript · Vite · Pinia",
-    desc: "Free, open-source alternatives directory — find FOSS replacements for everyday apps.",
-    link: "/portfolio/10"
-  },
-  {
-    id: 11,
-    title: "ClearWage",
-    category: "Enterprise",
-    tech: "Flutter · Go · PostgreSQL · Firebase",
-    desc: "Factory workforce management — attendance, payroll, advances, payslips from a phone.",
-    link: "/portfolio/11"
-  },
-  {
-    id: 12,
-    title: "Cafe Management System",
-    category: "Web",
-    tech: "React 18 · Vite 8 · MUI v5 · Express · PostgreSQL",
-    desc: "Free, open-source POS for restaurants and cafés. Mobile-first with India GST compliance.",
-    link: "/portfolio/12"
-  },
-  {
-    id: 13,
-    title: "Locus",
-    category: "Mobile",
-    tech: "Flutter · Dart · Hive · flutter_map · libre_location",
-    desc: "Location-aware reminders that trigger when you arrive — not when you forget.",
-    link: "/portfolio/13"
-  },
-  {
-    id: 14,
-    title: "SP Generator",
-    category: "Web",
-    tech: "React 18 · .NET 8.0+ · React Router v6 · Axios · Tailwind CSS",
-    desc: "Stored Procedure Generator — transforms how developers create and manage SPs for database systems.",
-    link: "/portfolio/14"
-  },
-  {
-    id: 15,
-    title: "SquadLink",
-    category: "Web",
-    tech: "Next.js · Supabase · TypeScript",
-    desc: "Next.js application bootstrapped with create-next-app, using Supabase for database and authentication.",
-    link: "/portfolio/15"
-  },
-  {
-    id: 16,
-    title: "SyncNoteNet",
-    category: "Web",
-    tech: "React 18 · Express 4 · Socket.io 4 · MongoDB · Monaco Editor · Quill",
-    desc: "Collaborative note-taking platform with real-time editing, version control, and rich collaboration features.",
-    link: "/portfolio/16"
-  },
-  {
-    id: 17,
-    title: "Wallbizz",
-    category: "Mobile",
-    tech: "Flutter · Go (Fiber) · Supabase · Wallhaven API",
-    desc: "Premium curated wallpapers. Zero clutter. Pure aesthetic. Dark-first wallpaper app.",
-    link: "/portfolio/17"
-  },
-  {
-    id: 18,
-    title: "ApertureX",
-    category: "Mobile",
-    tech: "Flutter · Dart · Rust · flutter_rust_bridge · Material 3",
-    desc: "The mobile-native, non-destructive, 100% on-device FOSS photo editor & darkroom.",
-    link: "/portfolio/18"
-  }
-];
-
 const Home = () => {
   const navigate = useSafeNavigate();
   const containerRef = useRef(null);
+
+  const featuredProjects = projects.slice(0, 6);
 
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        gsap.fromTo(
-          ".metrics-ribbon-item",
-          { y: 20, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            stagger: 0.08,
-            duration: 0.6,
-            ease: "power2.out",
-            clearProps: "transform,opacity",
-            scrollTrigger: {
-              trigger: ".metrics-ribbon-section",
-              start: "top 85%",
-              toggleActions: "play none none none",
-              once: true
-            }
-          }
-        );
-
         gsap.fromTo(
           ".service-card",
           { y: 24, opacity: 0 },
@@ -433,30 +310,6 @@ const Home = () => {
 
       <HomeHero onNavigate={navigate} />
 
-      {/* Impact Metrics Ribbon */}
-      <section className="metrics-ribbon-section w-full py-10 bg-white dark:bg-slate-900 border-b border-pink-100/80 dark:border-slate-800 transition-colors">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div className="metrics-ribbon-item p-4">
-              <div className="font-heading font-black text-3xl sm:text-4xl text-[#0891B2] dark:text-cyan-400 tracking-tight">8</div>
-              <div className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 mt-1">Production Deployments</div>
-            </div>
-            <div className="metrics-ribbon-item p-4">
-              <div className="font-heading font-black text-3xl sm:text-4xl text-[#EC4899] tracking-tight">100%</div>
-              <div className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 mt-1">Client Satisfaction</div>
-            </div>
-            <div className="metrics-ribbon-item p-4">
-              <div className="font-heading font-black text-3xl sm:text-4xl text-purple-600 dark:text-purple-400 tracking-tight">Since 2024</div>
-              <div className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 mt-1">Founded at Darshan University</div>
-            </div>
-            <div className="metrics-ribbon-item p-4">
-              <div className="font-heading font-black text-3xl sm:text-4xl text-emerald-600 dark:text-emerald-400 tracking-tight">7</div>
-              <div className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 mt-1">Core Architects</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Services Section: "Modular Capabilities" */}
       <section className="services-section w-full py-24 sm:py-28 bg-[#FDF2F8] dark:bg-slate-950 border-b border-pink-100/80 dark:border-slate-800">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
@@ -525,14 +378,14 @@ const Home = () => {
               onClick={() => navigate("/portfolio")}
               className="inline-flex items-center gap-2 text-sm font-heading font-semibold text-[#0891B2] dark:text-cyan-400 hover:text-[#EC4899] transition-colors cursor-pointer"
             >
-              <span>Explore All 8 Production Case Studies →</span>
+              <span>Explore All {projects.length} Production Case Studies →</span>
             </button>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {marqueeProjects.map((proj) => (
+            {featuredProjects.map((proj) => (
               <div
-                key={proj.title}
+                key={proj.id}
                 className="featured-project-card relative min-w-0 rounded-3xl bg-[#FDF2F8]/60 dark:bg-slate-800/50 border border-pink-200/80 dark:border-slate-700 p-7 sm:p-8 shadow-xs hover:shadow-lg hover:border-[#EC4899] transition-[border-color,box-shadow,background-color] duration-300 flex flex-col justify-between group"
               >
                 <div>
@@ -548,17 +401,17 @@ const Home = () => {
                   </h3>
 
                   <p className="text-xs font-mono text-[#0891B2] dark:text-cyan-400 font-semibold mb-4 break-words">
-                    {proj.tech}
+                    {Array.isArray(proj.tech) ? proj.tech.slice(0, 3).join(' · ') : proj.tech}
                   </p>
 
-                  <p className="font-sans text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
-                    {proj.desc}
+                  <p className="font-sans text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-6 line-clamp-3">
+                    {proj.description}
                   </p>
                 </div>
 
                 <div className="pt-4 border-t border-pink-200/60 dark:border-slate-700 flex items-center justify-between">
                   <SafeLink
-                    to={proj.link}
+                    to={`/portfolio/${proj.id}`}
                     className="text-xs font-heading font-bold text-slate-800 dark:text-slate-200 hover:text-[#EC4899] flex items-center gap-1 transition-colors"
                   >
                     View Case Study <ExternalLink className="w-3.5 h-3.5" />

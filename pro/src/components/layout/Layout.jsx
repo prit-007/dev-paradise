@@ -30,7 +30,7 @@ const Layout = () => {
       </a>
 
       <Navbar />
-      <main id="main-content" tabIndex={-1} className="flex-grow pt-16 outline-none">
+      <main id="main-content" tabIndex={-1} className="flex-grow outline-none">
         <Outlet />
       </main>
       <Footer />

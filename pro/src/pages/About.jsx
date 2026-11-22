@@ -67,7 +67,7 @@ const About = () => {
   };
 
   return (
-    <div ref={containerRef} className="flex flex-col min-h-screen bg-[#FDF2F8] dark:bg-slate-950 transition-colors duration-300">
+    <div ref={containerRef} className="flex flex-col w-full min-h-screen bg-[#FDF2F8] dark:bg-slate-950 transition-colors duration-300">
       <SEO
         title="About Us — Studio Blueprint"
         description="Learn about Developer's Paradise, our team, mission, engineering principles, and heritage at Darshan University, Rajkot."

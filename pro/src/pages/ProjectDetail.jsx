@@ -53,7 +53,7 @@ const ProjectDetail = () => {
   const galleryImages = project.gallery && project.gallery.length > 0 ? project.gallery : [project.image];
 
   return (
-    <div ref={scope} className="min-h-screen bg-[#FDF2F8] dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
+    <div ref={scope} className="flex flex-col w-full min-h-screen bg-[#FDF2F8] dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <div data-progress aria-hidden="true" className="fixed top-0 inset-x-0 h-0.5 z-60 origin-left scale-x-0 bg-gradient-to-r from-[#EC4899] to-[#0891B2]" />
       <SEO
         title={`${project.title} — Case Study`}
