@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Developer's Paradise</title>
+  <script type="module">
+    (function() {
+      var p = window.location.pathname;
+      var s = window.location.search;
+      var h = window.location.hash;
+      window.location.replace('/dev-paradise/?path=' + encodeURIComponent(p + s + h));
+    })();
+  </script>
+</head>
+<body>
+  Redirecting...
+</body>
+</html>
