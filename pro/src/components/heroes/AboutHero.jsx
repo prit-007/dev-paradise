@@ -16,23 +16,26 @@ export default function AboutHero() {
       }
       build={({ root, q, intro, scrub, gsap }) => {
         const bp = root.querySelector(".stage-card.bp");
+        let rect = null;
+        let move = () => {};
+        let leave = () => {};
+        const updateRect = () => { if (root) rect = root.getBoundingClientRect(); };
+
         if (bp) {
           gsap.set(bp, { transformPerspective: 1200 });
           const rx = gsap.quickTo(bp, "rotationX", { duration: 0.9, ease: "power3" });
           const ry = gsap.quickTo(bp, "rotationY", { duration: 0.9, ease: "power3" });
 
-          let rect = null;
-          const updateRect = () => { if (root) rect = root.getBoundingClientRect(); };
           updateRect();
           window.addEventListener("resize", updateRect, { passive: true });
 
-          const move = (e) => {
+          move = (e) => {
             if (!rect) updateRect();
             if (!rect || rect.width === 0) return;
             ry(((e.clientX - rect.left) / rect.width - 0.5) * 12);
             rx(-((e.clientY - rect.top) / rect.height - 0.5) * 10);
           };
-          const leave = () => {
+          leave = () => {
             rx(0);
             ry(0);
           };
@@ -48,11 +51,9 @@ export default function AboutHero() {
         scrub.to(q(".bp-svg"), { scale: 1.08, duration: 1 }, 0);
 
         return () => {
-          if (bp) {
-            root.removeEventListener("pointermove", move);
-            root.removeEventListener("pointerleave", leave);
-            window.removeEventListener("resize", updateRect);
-          }
+          root.removeEventListener("pointermove", move);
+          root.removeEventListener("pointerleave", leave);
+          window.removeEventListener("resize", updateRect);
         };
       }}
     >

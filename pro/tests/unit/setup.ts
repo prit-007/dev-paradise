@@ -37,6 +37,9 @@ const mockGsap = {
   killTweensOf: vi.fn(),
   registerPlugin: vi.fn(),
   defaults: vi.fn(),
+  utils: {
+    toArray: vi.fn((selector) => Array.from(document.querySelectorAll(selector))),
+  },
   timeline: vi.fn(() => ({
     from: vi.fn(),
     to: vi.fn(),
@@ -58,7 +61,7 @@ vi.mock('@/lib/gsap', () => ({
   useGSAP: mockUseGSAP,
   getEase: mockGetEase,
   ScrollTrigger: {},
-  Flip: {},
+  Flip: { getState: vi.fn(() => ({})) },
   ScrollToPlugin: {},
   TextPlugin: {},
 }));
