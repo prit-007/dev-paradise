@@ -91,7 +91,7 @@ jobs:
       - name: Build Vite project
         run: |
           cd pro
-          npm run build
+          VITE_BASE_PATH=/dev-paradise/ npm run build
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
@@ -116,6 +116,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: dist
+          path: pro/dist
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
           path: pro/dist
 
       - name: Deploy to GitHub Pages

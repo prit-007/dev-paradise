@@ -1,156 +1,108 @@
 # Developer's Paradise 🌐
 
-Welcome to **Developer's Paradise**, a digital home showcasing innovative web and mobile application development services. Designed with modern technologies and a passion for excellence, this React.js-based website reflects the professionalism and creativity of our team.
+Production-ready portfolio site showcasing innovative web and mobile application development.
+
+**Live site:** https://prit-007.github.io/dev-paradise/  
+**CI/CD:** [![GitHub Actions](https://github.com/prit-007/dev-paradise/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/prit-007/dev-paradise/actions/workflows/ci-cd.yml)
 
 ---
 
-## 🌟 Features
+## 📂 Repository Layout
 
-### 🔗 Seamless Navigation  
-- A responsive and elegant **Navbar** ensures effortless movement between pages.  
-- Intuitive links provide easy access to services, portfolio, and contact information.
+```
+dev-paradise/
+├── pro/                          # Application source (Vite + React 18 + Tailwind CSS v4)
+│   ├── README.md                 # Detailed developer documentation (start here)
+│   ├── package.json              # Dependencies & scripts
+│   ├── vite.config.js            # Vite configuration
+│   ├── index.html                # Vite entry HTML
+│   ├── input.css                 # Tailwind source CSS
+│   ├── src/                      # React source code
+│   ├── tests/                    # Vitest unit + Playwright e2e tests
+│   └── ...
+├── .github/
+│   └── workflows/
+│       └── ci-cd.yml             # CI/CD pipeline (lint → test → build → deploy)
+├── vercel.json                   # Vercel build settings
+├── .gitignore                    # Root Git ignore rules
+└── README.md                     # This file
+```
 
-### 💻 Fully Responsive Design  
-Optimized for all screen sizes — whether you're on a desktop, tablet, or mobile, the website guarantees a smooth and visually appealing experience.
-
-### 📋 Comprehensive Pages  
-- **Home:** A visually engaging introduction to Developer's Paradise.  
-- **About Us:** Get to know our story, vision, and the skilled professionals behind the brand.  
-- **Services:** Explore the cutting-edge web and mobile solutions we offer, tailored to your business needs.  
-- **Portfolio:** View our featured projects and case studies, showcasing the impact of our work.  
-- **Team:** Meet the brilliant engineers and designers driving Developer's Paradise.  
-- **Testimonials:** See what our satisfied clients have to say about working with us.  
-- **Contact Us:** Find out how to get in touch and start your next big project with us.
-
-### 🎨 Reusable Components  
-- **Navbar:** Dynamic and user-friendly navigation across all pages.  
-- **Footer:** A clean, professional footer for quick access to key links and contact details.  
-- **Layout:** A unified structure that maintains consistency throughout the website.
-
-### ✨ Additional Features  
-- **Professional Design:** A polished and modern UI/UX built with best practices.  
-- **Optimized Performance:** Fast-loading pages with clean code for the best user experience.  
-- **Social Media Integration:** Links to our social media platforms for extended engagement.
+> 👉 **All development happens in the `pro/` directory.** See [`pro/README.md`](./pro/README.md) for complete setup, architecture, testing, and deployment documentation.
 
 ---
 
-## 🚀 Tech Stack
+## 🚀 Quick Start
 
-**Frontend:**  
-- React.js for building a dynamic and responsive UI.  
-- CSS3 for modern and clean styling.
+```bash
+# Clone the repository
+git clone https://github.com/prit-007/dev-paradise.git
+cd dev-paradise
 
-**Other Tools:**  
-- React Router for smooth page transitions.  
-- Git and GitHub for version control.
+# Enter the app directory
+cd pro
 
----
-## 📂 Folder Structure
+# Install dependencies
+npm install
 
-Below is the folder structure of the **Developer's Paradise** project for better    understanding and navigation:
+# Start development server
+npm run dev
 
-    DEV-PARADISE/ 
-    ├── node_modules/ # Dependencies installed via npm 
-    ├── public/ # Public assets like images and static files 
-    │ ├── index.html # Main HTML file 
-    │ └── favicon.ico # Favicon for the website 
-    ├── src/ # Source code for the React application 
-    │ ├── components/ # Reusable components for the website 
-    │ │ └── layout/ # Layout components for consistency 
-    │ │ ├── Footer.jsx # Footer component 
-    │ │ ├── Layout.jsx # Main layout wrapper 
-    │ │ └── Navbar.jsx # Navigation bar component 
-    │ ├── pages/ # Pages representing different sections 
-    │ │ ├── About.jsx # About Us page 
-    │ │ ├── Contact.jsx # Contact Us page 
-    │ │ ├── Home.jsx # Home page 
-    │ │ ├── Portfolio.jsx # Portfolio/Projects page 
-    │ │ ├── Services.jsx # Services offered 
-    │ │ ├── Team.jsx # Meet the Team page 
-    │ │ └── Testimonials.jsx # Testimonials/Reviews page 
-    │ ├── App.css # Global styles for the application 
-    │ ├── App.jsx # Main application file 
-    │ ├── App.test.js # Unit tests for the app 
-    │ ├── index.css # Base CSS file 
-    │ └── index.jsx # Entry point for React DOM rendering 
-    ├── package.json # Project metadata and dependencies 
-    ├── README.md # Project documentation 
-    └── .gitignore # Files and directories to ignore in Git
-
-    
-### 📋 Notes:
-- **components/layout**: Houses components like the navbar, footer, and layout wrapper to maintain consistent design across all pages.
-- **pages**: Contains React components corresponding to individual pages of the website.
-- **public**: Includes static files directly served without processing.
-
-This structured approach ensures modularity, scalability, and ease of maintenance.
+# Open http://localhost:5173
+```
 
 ---
 
-## 🛠️ How to Run the Project
+## 🛠️ Tech Stack
 
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/pritvasani/dev-paradise.git
-    ```
-2. Navigate to directory
-    ```bash
-    cd dev-paradise
-    ```
-3. Install all dependencies:
-    ```bash
-    npm install
-    ```
-4. Start the development server:
-    ```bash
-    npm start
-    ```
-    -For tailwind live building
-    ```bash
-        npx tailwindcss -i ./src/input.css -o ./src/output.css --watch
-    ```
-5. Open your browser and navigate to:
-    ```arduino
-    http://localhost:3000
-    ```
+| Layer | Technology |
+|-------|-----------|
+| Framework | React 18.3.1 |
+| Build Tool | Vite 5.4.x |
+| Styling | Tailwind CSS v4 |
+| Animations | Framer Motion, GSAP |
+| Icons | Lucide React, React Icons, Heroicons |
+| Routing | React Router DOM 7.x |
+| Unit Tests | Vitest 4.1.x |
+| E2E Tests | Playwright 1.65.x |
+| Linting | ESLint 8.x |
 
 ---
 
-## ✨ Future Enhancements
+## 📖 Documentation
 
-We are constantly improving to deliver an exceptional user experience. Here are some planned updates for the website:
+| Document | Location | Description |
+|----------|----------|-------------|
+| Developer Guide | `pro/README.md` | Full setup, architecture, API, scripts |
+| Contributing | `CONTRIBUTING.md` | How to contribute to this project |
+| CI/CD Pipeline | `.github/workflows/ci-cd.yml` | Lint → test → build → deploy workflow |
 
-- **🌙 Dark Mode Support:** Introducing a light/dark mode toggle for enhanced accessibility and user preference.  
-- **🎞️ Interactive Animations:** Implementing smooth animations and transitions to create a dynamic and engaging user interface.  
-- **⚡ Backend Integration:** Adding server-side functionality using technologies like Node.js, Express, or Firebase to manage dynamic content and user data.  
-- **📰 Blog Section:** A dedicated space for sharing industry insights, development tips, and the latest news in tech.  
-- **💡 Live Chat Support:** Enable instant communication to better assist users and address their queries.
+---
+
+## 🔄 CI/CD Pipeline
+
+Pushes to `master` trigger the GitHub Actions workflow:
+
+1. **lint** — ESLint with `--max-warnings 0`
+2. **test** — Vitest unit tests (50 tests)
+3. **build** — Vite production build → `pro/dist/`
+4. **deploy** — GitHub Pages via `actions/deploy-pages@v4`
 
 ---
 
 ## 👨‍💻 About the Developer
 
-This project is crafted by **Prit Vasani**, a passionate software engineer specializing in modern web and mobile application development. With expertise in technologies like React.js, Flutter, and .NET, Prit strives to create innovative solutions tailored to clients' needs.
+**Prit Vasani** — Software Engineer  
+- GitHub: [@prit-007](https://github.com/prit-007)  
+- Email: pritvasani@example.com  
+- LinkedIn: [Prit Vasani](https://linkedin.com/in/pritvasani)
 
 ---
 
-## 📞 Contact Information
+## 📄 License
 
-We’d love to connect with you! Reach out for inquiries, collaborations, or feedback:  
-
-- **Email:** pritvasani@example.com  
-- **GitHub:** [Prit Vasani](https://github.com/pritvasani)  
-- **LinkedIn:** [Prit Vasani](https://linkedin.com/in/pritvasani)  
-
-Feel free to get in touch — let’s create something amazing together! 🚀
+MIT License. See [LICENSE](LICENSE) for details.
 
 ---
 
-## 🙌 Acknowledgements
-
-- Special thanks to the **Developer's Paradise** team for their creativity and hard work.  
-- Heartfelt gratitude to our clients for their trust and support in making this project a reality.  
-
----
-
-Thank you for exploring **Developer's Paradise**! 🌟 We’re here to bring your digital ideas to life with innovation and excellence.
+Thank you for exploring **Developer's Paradise**! 🌟
