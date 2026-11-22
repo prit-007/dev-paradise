@@ -1,3 +1,171 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-heading: "Archivo", system-ui, -apple-system, sans-serif;
+  --font-sans: "Space Grotesk", system-ui, -apple-system, sans-serif;
+
+  --color-primary: #EC4899;
+  --color-primary-dark: #BE185D;
+  --color-secondary: #F472B6;
+  --color-accent: #0891B2;
+  --color-accent-dark: #0E7490;
+  --color-brand-bg: #FDF2F8;
+  --color-brand-foreground: #831843;
+  --color-brand-card: #FFFFFF;
+  --color-brand-border: #FBCFE8;
+  --color-brand-muted: #F1EEF5;
+  --color-brand-dark: #0F172A;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  body {
+    font-family: var(--font-sans);
+    color: #1e293b;
+    background-color: #fdf2f8;
+    overflow-x: hidden;
+  }
+
+  .dark body {
+    color: #f8fafc;
+    background-color: #020617;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.025em;
+  }
+
+  /* Accessible high-contrast focus outlines */
+  :focus-visible {
+    outline: 2px solid #0891b2;
+    outline-offset: 2px;
+  }
+}
+
+/* Apple-Grade Glassmorphism & Specular Lighting */
+.apple-glass {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 20px 48px -12px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.dark .apple-glass {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(255, 255, 255, 0.02);
+}
+
+.apple-glass-dark {
+  background: rgba(15, 23, 42, 0.9);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.4);
+}
+
+.apple-card {
+  background: #ffffff;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(251, 207, 232, 0.7);
+  box-shadow: 0 4px 16px -2px rgba(236, 72, 153, 0.06), 0 1px 2px rgba(0, 0, 0, 0.02);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+
+.dark .apple-card {
+  background: #0f172a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.3);
+}
+
+.apple-card:hover {
+  transform: translateY(-4px);
+  border-color: #ec4899;
+  box-shadow: 0 24px 48px -12px rgba(236, 72, 153, 0.16), 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.dark .apple-card:hover {
+  border-color: #ec4899;
+  box-shadow: 0 24px 48px -12px rgba(236, 72, 153, 0.25), 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.apple-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.apple-pill-btn:active {
+  transform: scale(0.97);
+}
+
+.neo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(236, 72, 153, 0.1);
+  color: #db2777;
+  border: 1px solid rgba(236, 72, 153, 0.25);
+  box-shadow: 0 1px 3px rgba(236, 72, 153, 0.08);
+}
+
+.dark .neo-badge {
+  background: rgba(236, 72, 153, 0.15);
+  color: #f472b6;
+  border-color: rgba(236, 72, 153, 0.35);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* Custom Scrollbar for refined desktop feel */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fdf2f8;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #020617;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #fbcfe8;
+  border-radius: 9999px;
+  border: 2px solid #fdf2f8;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-color: #020617;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ec4899;
+}

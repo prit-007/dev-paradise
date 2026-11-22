@@ -1,70 +1,125 @@
-# Getting Started with Create React App
+# Developer's Paradise (Vite + React)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was migrated from Create React App to **Vite + React**.
 
 ## Available Scripts
 
-In the project directory, you can run:
+In the project directory (`pro/`), you can run:
 
-### `npm start`
+### `npm run dev`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Runs the app in development mode with Vite's HMR.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The page reloads when you make changes. You may also see lint errors in the console.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
+Builds the app for production to the `dist` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The build is minified and filenames include hashes. Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `npm run preview`
 
-### `npm run eject`
+Locally preview the production build before deploying.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Tech Stack
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Frontend:**  
+- React.js (v18)  
+- Vite (build tool & dev server)  
+- CSS3 / Tailwind CSS (via PostCSS)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**Routing:**  
+- React Router DOM for smooth page transitions
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+**Other Tools:**  
+- Framer Motion for animations  
+- Lucide React & React Icons for icons  
+- Git and GitHub for version control
 
-## Learn More
+## Project Structure
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+pro/
+├── index.html            # Vite entry HTML
+├── vite.config.js        # Vite configuration
+├── postcss.config.js     # PostCSS (Tailwind + Autoprefixer) config
+├── tailwind.config.js    # Tailwind CSS configuration
+├── package.json          # Project metadata and dependencies
+├── public/               # Static assets (favicon, manifest, images)
+│   ├── favicon.ico
+│   ├── manifest.json
+│   ├── logo192.png
+│   ├── logo512.png
+│   └── images/
+├── src/
+│   ├── main.jsx          # React entry point
+│   ├── index.jsx         # Legacy entry point (kept for reference)
+│   ├── App.jsx           # Main application with routes
+│   ├── App.css           # Global styles
+│   ├── index.css         # Base CSS reset
+│   ├── input.css         # Tailwind source CSS (@tailwind directives)
+│   ├── components/
+│   │   └── layout/
+│   │       ├── Footer.jsx
+│   │       ├── Layout.jsx
+│   │       └── Navbar.jsx
+│   ├── pages/
+│   │   ├── About.jsx
+│   │   ├── Contact.jsx
+│   │   ├── Home.jsx
+│   │   ├── Portfolio.jsx
+│   │   ├── Services.jsx
+│   │   ├── Team.jsx
+│   │   └── Testimonials.jsx
+│   └── ...
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## How to Run the Project
 
-### Code Splitting
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/pritvasani/dev-paradise.git
+   cd dev-paradise/pro
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+2. Install all dependencies:
+   ```bash
+   npm install
+   ```
 
-### Analyzing the Bundle Size
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+4. Open your browser and navigate to:
+   ```
+   http://localhost:3000
+   ```
 
-### Making a Progressive Web App
+5. Build for production:
+   ```bash
+   npm run build
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+6. Preview production build locally:
+   ```bash
+   npm run preview
+   ```
 
-### Advanced Configuration
+## Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+The site is deployed to GitHub Pages (`gh-pages` branch) automatically via GitHub Actions on every push to `master`. The workflow builds with Vite (`npm run build`) and deploys the `pro/dist` folder.
 
-### Deployment
+## About the Developer
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+This project is crafted by **Prit Vasani**, a passionate software engineer specializing in modern web and mobile application development.
 
-### `npm run build` fails to minify
+## Contact Information
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **Email:** pritvasani@example.com  
+- **GitHub:** [Prit Vasani](https://github.com/pritvasani)  
+- **LinkedIn:** [Prit Vasani](https://linkedin.com/in/pritvasani)
