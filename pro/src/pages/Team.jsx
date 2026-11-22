@@ -178,15 +178,15 @@ const Team = () => {
   }, [selectedMember]);
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-[#FDF2F8] dark:bg-slate-950 text-slate-900 dark:text-slate-100 py-16 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+    <div ref={containerRef} className="flex flex-col w-full min-h-screen bg-[#FDF2F8] dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <SEO
         title="Our Team — 7 Core Creators"
         description="Meet the 7 visionary engineers, architects, and designers driving Developer's Paradise at Darshan University, Rajkot."
       />
 
-      <div className="max-w-6xl mx-auto">
-        <TeamHero onSelect={setSelectedMember} />
+      <TeamHero onSelect={setSelectedMember} />
 
+      <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Team Grid */}
         <div className="team-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
           {teamMembers.map((member) => (

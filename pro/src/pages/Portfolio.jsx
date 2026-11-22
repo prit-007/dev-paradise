@@ -5,7 +5,7 @@ import { LayoutGrid, List, ArrowRight } from 'lucide-react';
 import { gsap, useGSAP, Flip } from '@/lib/gsap';
 import { projects } from '@/data/projects';
 import NoResults from '@/components/NoResults';
-import SEO, { useSafeSearchParams, useSafeNavigate } from '@/components/SEO';
+import SEO, { useSafeSearchParams } from '@/components/SEO';
 import PortfolioHero from '@/components/heroes/PortfolioHero';
 
 const categories = ['All', 'Web', 'Mobile', 'Enterprise'];
@@ -19,7 +19,6 @@ const Portfolio = () => {
   const [activeCategory, setActiveCategory] = useState(initialCategory);
   const [searchQuery, setSearchQuery] = useState(initialQuery);
   const [viewMode, setViewMode] = useState(initialViewMode);
-  const navigate = useSafeNavigate();
   const containerRef = useRef(null);
   const gridContainerRef = useRef(null);
   const flipStateRef = useRef(null);
@@ -100,15 +99,18 @@ const Portfolio = () => {
   }, { dependencies: [activeCategory, viewMode, searchQuery], scope: gridContainerRef });
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-[#FDF2F8] dark:bg-slate-950 text-slate-900 dark:text-slate-100 py-16 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+    <div ref={containerRef} className="flex flex-col w-full min-h-screen bg-[#FDF2F8] dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <SEO
         title="Our Work & Production Solutions"
         description="Explore 8 production-grade web applications, Flutter mobile apps, and enterprise systems engineered by Developer's Paradise."
       />
 
-      <div className="max-w-6xl mx-auto">
-        <PortfolioHero onExplore={navigate} />
+      <PortfolioHero onExplore={() => {
+        const controls = document.getElementById('portfolio-controls');
+        controls?.scrollIntoView({ behavior: 'smooth' });
+      }} />
 
+      <div id="portfolio-controls" className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Category & View Controls */}
         <div className="pt-5 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
           <div className="flex flex-wrap items-center gap-2">

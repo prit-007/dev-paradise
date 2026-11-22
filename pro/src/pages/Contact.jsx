@@ -115,15 +115,15 @@ const Contact = () => {
   };
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-[#FDF2F8] dark:bg-slate-950 py-16 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+    <div ref={containerRef} className="flex flex-col w-full min-h-screen bg-[#FDF2F8] dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <SEO
         title="Contact Us — Direct Engineering Consultation"
         description="Get in touch with the Developer's Paradise engineering team. Direct consultation, 24-hour response SLA, and project scoping."
       />
 
-      <div className="max-w-5xl mx-auto">
-        <ContactHero />
+      <ContactHero />
 
+      <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Main Form & Detail Container */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           {/* Studio Left Column */}

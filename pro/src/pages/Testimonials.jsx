@@ -126,15 +126,15 @@ const Testimonials = () => {
   const stars = Array.from({ length: 5 }, (_, i) => i < current.rating);
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-[#FDF2F8] dark:bg-slate-950 py-16 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+    <div ref={containerRef} className="flex flex-col w-full min-h-screen bg-[#FDF2F8] dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <SEO
         title="Client Testimonials & Feedback"
         description="Read real client reviews, case feedback, and project results from businesses powered by Developer's Paradise."
       />
 
-      <div className="max-w-5xl mx-auto">
-        <TestimonialsHero items={testimonials} />
+      <TestimonialsHero items={testimonials} />
 
+      <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Testimonial Carousel Card */}
         <section aria-label="Client testimonials" className="relative max-w-3xl mx-auto">
           <div
